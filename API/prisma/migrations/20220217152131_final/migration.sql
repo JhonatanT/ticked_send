@@ -1,0 +1,24 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- CreateTable
+CREATE TABLE [dbo].[login] (
+    [id] NVARCHAR(1000) NOT NULL,
+    [user] NVARCHAR(1000) NOT NULL,
+    [password] NVARCHAR(1000) NOT NULL,
+    CONSTRAINT [login_pkey] PRIMARY KEY ([id])
+);
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH

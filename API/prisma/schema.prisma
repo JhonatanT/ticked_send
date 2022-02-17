@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Login {
+  id       String @id @default(uuid())
+  user     String
+  password String
+
+  @@map("login")
+}
+
+model Email_User {
+  id        String @id @default(uuid())
+  user      User   @relation(fields: [id_pessoa], references: [id_pessoa])
+  id_pessoa String
+  email     String
+
+  @@map("email_user")
+}
+
+model Telefone_User {
+  id              String @id @default(uuid())
+  user            User   @relation(fields: [id_pessoa], references: [id_pessoa])
+  id_pessoa       String
+  numero_telefone String
+
+  @@map("telefone_user")
+}
+
+model User {
+  id_pessoa        String @id
+  tipopessoa       String
+  tipodocumento    String
+  cnpj_cpf         String
+  nome_razao       String
+  nomefantasia     String
+  contato          String
+  ie_rg            String
+  cadastro         String
+  diafaturamento   String
+  valormensalidade String
+  situacao         String
+
+  Email_User    Email_User[]
+  Telefone_User Telefone_User[]
+  @@map("user")
+}

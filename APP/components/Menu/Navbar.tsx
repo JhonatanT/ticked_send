@@ -1,0 +1,61 @@
+import { parseCookies } from 'nookies';
+import React, { useState, useEffect, useContext } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { IconContext } from 'react-icons/lib';
+import { AuthContext } from '../../contexts/AuthContext';
+import { Button } from '../../styles/globalStyles';
+import {
+    Nav,
+    NavbarContainer,
+    NavLogo,
+    NavIcon,
+    MobileIcon,
+    NavMenu,
+    NavItem,
+    NavItemBtn,
+    NavLinks,
+    NavBtnLink
+} from './Navbar.elements';
+
+export function Navbar() {
+        
+    const [click, setClick] = useState(false);
+    const [button, setButton] = useState(true);
+
+    const handleClick = () => setClick(!click);
+    const closeMobileMenu = () => setClick(false);
+
+    const showButton = () => {
+        if (window.innerWidth <= 960) {
+            setButton(false);
+        } else {
+            setButton(true);
+        }
+    };
+
+    useEffect(() => {
+        showButton();
+    }, []);
+
+    return (
+        <body>
+            <IconContext.Provider value={{ color: '#fff' }}>
+                <Nav>
+                    <NavbarContainer>
+                        <NavLogo to='/' onClick={closeMobileMenu} >
+                            <NavIcon />
+                            Hayashi
+                        </NavLogo>
+                        <MobileIcon onClick={handleClick}>
+                            {click ? <FaTimes /> : <FaBars />}
+                        </MobileIcon>
+                        <NavMenu onClick={handleClick} click={click} >
+
+                        </NavMenu>
+                    </NavbarContainer>
+                </Nav>
+            </IconContext.Provider>
+
+        </body>
+    );
+}
