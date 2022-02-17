@@ -125,7 +125,28 @@ export function AuthProvider({ children }) {
                                     })
                                 )
                             }
+                            else{
+                                Swal.fire(
+                                    'Senha Incorreta',
+                                    'As senhas estão diferentes',
+                                    'error'
+                                )
+                            }
                         }
+                        else{
+                            Swal.fire(
+                                'Senha Incorreta',
+                                'As senhas estão diferentes',
+                                'error'
+                            )
+                        }
+                }
+                else{
+                    Swal.fire(
+                        'Senha Incorreta',
+                        'As senhas estão diferentes',
+                        'error'
+                    )
                 }
             },
             willClose: () => {
