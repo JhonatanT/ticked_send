@@ -3,6 +3,7 @@ import multer from "multer";
 import { saveArquivo } from "./save.routes";
 import { sendEmail } from "./sendEmail.routes";
 import { sendWhatsapp } from "./whatsapp.routes";
+import { uploads } from "./upload.routes";
 import { login } from "./login.routes";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
@@ -24,5 +25,6 @@ router.use("/login", login)
 router.use("/saveArquivo", ensureAuthenticated, upload.single("file"), saveArquivo)
 router.use("/sendEmail", ensureAuthenticated, sendEmail)
 router.use("/sendWhatsapp", ensureAuthenticated, sendWhatsapp)
+router.use("/upload", ensureAuthenticated, uploads)
 
 export { router}

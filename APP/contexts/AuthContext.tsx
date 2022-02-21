@@ -22,6 +22,7 @@ type AuthContextType = {
     isAthenticated: boolean;
     Logar: (data: LogarType) => Promise<void>;
     Upload_boleto: (data: Upload_boletoType) => Promise<void>;
+    upload_bd: () => Promise<void>;
 }
 
 export const AuthContext = createContext({} as AuthContextType);
@@ -154,7 +155,7 @@ export function AuthProvider({ children }) {
             }
             }).then((result) => {
                 if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('object');
+                    console.log(result);
                 }
             })
         }
@@ -164,8 +165,45 @@ export function AuthProvider({ children }) {
 
     }
 
+    async function upload_bd() {
+        
+        Swal.fire({
+            title: 'Deseja Atualizar os dados dos clientes?',
+            text: "Atualizar dados?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim'
+        }).then(async (result) => {
+            
+            if (result.isConfirmed) {
+            
+                const data  = await api.post('/upload');
+                console.log(data)
+                if(data.status === 200){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Dados dos Clientes Atualizados com sucesso',
+                        showConfirmButton: false,
+                        timer: 4000
+                    })
+                }
+                else{
+                    Swal.fire(
+                        'Algo deu errado',
+                        'Algo deu errado no servidor',
+                        'error'
+                    )
+                }
+            }
+        });
+
+    }
+
     return (
-        <AuthContext.Provider value={{ Upload_boleto,Logar,isAthenticated }}>
+        <AuthContext.Provider value={{ Upload_boleto,Logar,isAthenticated, upload_bd }}>
             {children}
         </AuthContext.Provider>
     )
