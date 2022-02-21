@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/app.ts"
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/app.ts",
+    "build":"rm -rf dist/ && prettier --write source/ && tsc",
+    "prod": "pm2 start ./dist/app.js --name consignado --watch"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
