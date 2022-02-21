@@ -6,7 +6,6 @@ import {v4} from 'uuid'
 
 class SendEmailService{
     async execute(msg:string, page:number){
-        console.log(page);
         if(page != 5 && page != 20){
             return 'Informe uma data valida'
         }
@@ -15,6 +14,7 @@ class SendEmailService{
         dotenv.config();
 
         let email=[]
+        let email_incorrct=[]
         let user= process.env.EMAIL;
         let pass= process.env.PASS;
 
@@ -26,8 +26,6 @@ class SendEmailService{
         })
 
         for(var i=0; i < result.length; i++){
-
-            console.log("Email enviado para : " + result[i].email);
 
             const transporter = nodemailer.createTransport({
                 host: "smtp.gmail.com",
@@ -52,13 +50,14 @@ class SendEmailService{
                     if(err){
                         throw err;	
                     }else{
-                        console.log('Arquivo renomeado');
+                        //console.log('Arquivo renomeado');
                     }
                 });
     
             }
             catch(e:any){
-                throw e;
+                email_incorrct.push(e)
+                return email_incorrct
             }
         }
 

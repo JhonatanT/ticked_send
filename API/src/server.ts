@@ -41,7 +41,7 @@ client.on('ready', () => {
     console.log('Client is ready!');
 });
 
-//client.initialize();
+client.initialize();
 
 const serverHttp = http.createServer(app)
 

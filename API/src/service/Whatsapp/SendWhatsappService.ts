@@ -15,7 +15,6 @@ class SendWhatsappService{
         
         for(var i=0; i < result.length; i++){
             const blt = MessageMedia.fromFilePath(`./Email/${page}/${result[i].id_pessoa}.pdf`)
-            console.log("msg enviado para : " + result[i].numero_telefone);
             client.sendMessage(`5511${result[i].numero_telefone}@c.us`,`${msg} , Data: ${date_now}`)
             client.sendMessage(`5511${result[i].numero_telefone}@c.us`,blt)
         
