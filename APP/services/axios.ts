@@ -4,7 +4,7 @@ import { parseCookies } from "nookies";
 export function getAPIClient(ctx?: any) {
 
     const api = axios.create({
-        baseURL: 'http://localhost:3030/'
+        baseURL: 'http://localhost:3050/'
     });
 
     const { 'token': token } = parseCookies(ctx);

@@ -4,10 +4,8 @@ import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { AuthContext } from '../../contexts/AuthContext'
 import Swal from 'sweetalert2'
-import React, { useState } from 'react'
+import React from 'react'
 import { parseCookies } from 'nookies'
-import Router from 'next/router'
-import { api } from '../../services/api'
 
 export default function Home(dado) {
   const { register, handleSubmit } = useForm();
@@ -67,7 +65,7 @@ export default function Home(dado) {
                     <br />
                   <label className={styles.select}>
                     <h5>Digite a mensagem:</h5>
-                    <textarea name="msg" Cols="40" Rows="2" required {...register('msg')}></textarea>
+                    <textarea name="msg" cols={40} rows={2} required {...register('msg')}></textarea>
                   </label>
                   <br />
                 <button type="submit">

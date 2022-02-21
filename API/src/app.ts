@@ -1,3 +1,3 @@
 import { serverHttp } from "./server";
 
-serverHttp.listen(3030, () => console.log("RUNNING 3030"))
+serverHttp.listen(3050, () => console.log("RUNNING 3050"))

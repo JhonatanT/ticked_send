@@ -25,6 +25,12 @@ type AuthContextType = {
     upload_bd: () => Promise<void>;
 }
 
+declare global {
+    interface FormData {
+        _boundary(): any;
+    }
+  }
+
 export const AuthContext = createContext({} as AuthContextType);
 
 export function AuthProvider({ children }) {
@@ -84,7 +90,7 @@ export function AuthProvider({ children }) {
                 html: '<h1>NÃO FECHAR ESPERE TERMINAR</h2> <br/>Enviado Email para os clientes <b></b>',
                 didOpen: async () => {
                     Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
+                    const b:any = Swal.getHtmlContainer().querySelector('b')
 
                     const formData = new FormData();
                     formData.append("file", file[0]);

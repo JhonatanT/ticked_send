@@ -65,8 +65,6 @@ export default function Homes() {
       )
     }
     else{ 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
 
     return (
       
@@ -87,8 +85,6 @@ export default function Homes() {
                     type="text" 
                     id="inp" 
                     {...register('usuario')}
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
                     placeholder="&nbsp;
                     
                   "/>
@@ -102,8 +98,6 @@ export default function Homes() {
                     type="password" 
                     id="inp" 
                     {...register('senha')}
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
                     placeholder="&nbsp;
                     
                   "/>
