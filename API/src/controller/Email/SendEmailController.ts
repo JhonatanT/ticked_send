@@ -8,8 +8,8 @@ class SendEmailController{
 
         const sendEmailService = new SendEmailService();
 
-        const senEmail = await sendEmailService.execute(msg, page)
-
+        const senEmail = await sendEmailService.execute({msg, page})
+        
         return response.status(200).json(senEmail)
 
     }

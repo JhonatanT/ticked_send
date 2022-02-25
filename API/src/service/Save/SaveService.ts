@@ -10,6 +10,7 @@ class SaveService{
             return files
 
         } catch (err) {
+            console.log(err);
             return err
         }
 

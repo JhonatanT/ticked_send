@@ -101,13 +101,14 @@ export function AuthProvider({ children }) {
                             "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
                         }
                     })
-                    console.log(save_boleto.data);
+
                     if(save_boleto.status == 200){
 
                         const sendWhatsapp = await api.post('/sendWhatsapp',{
                             msg: msg,
                             page: page
                         })
+                        console.log(sendWhatsapp);
 
                         if(sendWhatsapp.status == 200){
 
@@ -121,6 +122,8 @@ export function AuthProvider({ children }) {
                                 b.textContent = Swal.getTimerLeft()
 
                                 clearInterval(timerInterval)
+
+                                console.log(sendEmail.data);
                                 
                                 return (
                                     Swal.fire({
@@ -134,24 +137,24 @@ export function AuthProvider({ children }) {
                             }
                             else{
                                 Swal.fire(
-                                    'Senha Incorreta',
-                                    'As senhas estão diferentes',
+                                    'Algo deu errado com os e-mail',
+                                    'Verifique os e-mails',
                                     'error'
                                 )
                             }
                         }
                         else{
                             Swal.fire(
-                                'Senha Incorreta',
-                                'As senhas estão diferentes',
+                                'Algo deu errado com Whatsapp',
+                                'Verifique os Whatsapp',
                                 'error'
                             )
                         }
                 }
                 else{
                     Swal.fire(
-                        'Senha Incorreta',
-                        'As senhas estão diferentes',
+                        'Algo deu errado com os arquivos',
+                        'Verifique os arquivos',
                         'error'
                     )
                 }

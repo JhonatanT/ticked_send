@@ -46,6 +46,7 @@ model User {
   diafaturamento   String
   valormensalidade String
   situacao         String
+  dia              String
 
   Email_User    Email_User[]
   Telefone_User Telefone_User[]

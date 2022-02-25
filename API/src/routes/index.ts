@@ -25,6 +25,6 @@ router.use("/login", login)
 router.use("/saveArquivo", ensureAuthenticated, upload.single("file"), saveArquivo)
 router.use("/sendEmail", ensureAuthenticated, sendEmail)
 router.use("/sendWhatsapp", ensureAuthenticated, sendWhatsapp)
-router.use("/upload", ensureAuthenticated, uploads)
+router.use("/upload", uploads)
 
 export { router}
