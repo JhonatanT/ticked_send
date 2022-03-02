@@ -33,6 +33,7 @@ class SendEmailService{
         let arquivo_incorrct= []
         let user= process.env.EMAIL;
         let pass= process.env.PASS;
+        let id_arquivo_inco: string[] = []
 
         const result = await prisma.$queryRaw<user[]>(
             Prisma.sql`SELECT a.id_pessoa, a.email FROM [DB_Hayashi_Boleto].[dbo].[email_user] a
@@ -67,19 +68,27 @@ class SendEmailService{
                
             }
             catch(err:any){
-                fs.unlink(`./Email/${page}/${result[i].id_pessoa}.pdf`, () => {console.log("Deletado arquivo sem ID");})
-                console.log(err.path);
                 if(err.path){
                     arquivo_incorrct.push(`${result[i].id_pessoa}.pdf`)     
                 }
                 else{
                     email_incorrct.push(err.rejected[0]);
+                    console.log(err.rejected[0]);
                 }
             }
         }
 
-        return {email_enviados:email, email_não_enviados: email_incorrct, arquivo_com_problema : arquivo_incorrct}
+        const dir = `./Email/${page}/`;
+        let filenames = fs.readdirSync(dir);
+
+        filenames.forEach(file => {
+            id_arquivo_inco.push(file);
+            fs.rename(`./Email/${page}/${file}`, `./Email/Enviados/${file}_id_arquivo_inco_+${Date_now}`,() => {console.log('arquivo errado');});
+        });
+
+        return {email_enviados:email, email_não_enviados: email_incorrct, arquivo_n_exist : arquivo_incorrct, id_incorrect: id_arquivo_inco}
     
     } 
 }
 export{SendEmailService}
+

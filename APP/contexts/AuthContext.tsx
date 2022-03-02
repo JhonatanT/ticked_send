@@ -108,6 +108,7 @@ export function AuthProvider({ children }) {
                             msg: msg,
                             page: page
                         })
+
                         console.log(sendWhatsapp);
 
                         if(sendWhatsapp.status == 200){
@@ -126,14 +127,37 @@ export function AuthProvider({ children }) {
                                 console.log(sendEmail.data);
                                 
                                 return (
+
+
                                     Swal.fire({
                                         position: 'center',
                                         icon: 'success',
                                         title: 'Envio de Boletos, Concluido',
-                                        showConfirmButton: false,
-                                        timer: 4000
+                                        html:
+                                        `<br>`+
+                                        `Email enviado com sucesso:`+
+                                        `<br>`+
+                                        `[${sendEmail.data.email_enviados}] `+
+                                        `<br>`+
+                                        `<br>`+
+                                        `Email não enviados:`+
+                                        `<br>`+
+                                        `[${sendEmail.data.email_não_enviados}]`+
+                                        `<br>`+
+                                        `<br>`+
+                                        `Existe no banco mas colocou o arquivo:`+
+                                        `<br>`+
+                                        `[${sendEmail.data.arquivo_n_exist}]`+
+                                        `<br>`+
+                                        `<br>`+
+                                        `Arquivo com IDs incorretos: `+
+                                        `<br>`+
+                                        `[${sendEmail.data.id_incorrect}]`,
+
+                                        showConfirmButton: true,
                                     })
                                 )
+
                             }
                             else{
                                 Swal.fire(
