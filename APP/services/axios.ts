@@ -7,6 +7,7 @@ export function getAPIClient(ctx?: any) {
         baseURL: 'http://localhost:3050/'
     });
 
+
     const { 'token': token } = parseCookies(ctx);
 
     if (token) {
